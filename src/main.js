@@ -192,13 +192,23 @@ var lastX = null;
 var lastY = null;
 function UpdateMousePosition(X,Y){
     var currentTime = Date.now();
-    var deltaTime = currentTime - prevTime;
+    var deltaX = lastX === null ? 0 : X - lastX;
+    var deltaY = lastY === null ? 0 : Y - lastY;
+    var deltaTime = prevTime === null ? 0 : currentTime - prevTime;
+    var velocityX = 0;
+    var velocityY = 0;
+
+    // Guard against zero/invalid event spacing so drag input cannot inject NaNs/Infinities.
+    if (deltaTime > 0) {
+        velocityX = Math.round(deltaX / deltaTime * 100);
+        velocityY = Math.round(deltaY / deltaTime * 100);
+    }
 
     externalVelocity.source.x = X * grid_resolution.x / window.innerWidth;
     externalVelocity.source.y = Y * grid_resolution.y / window.innerHeight;
 
-    externalVelocity.sourceDirection.x = Math.round((X-lastX) / deltaTime * 100);
-    externalVelocity.sourceDirection.y = Math.round((Y-lastY) / deltaTime * 100);
+    externalVelocity.sourceDirection.x = Number.isFinite(velocityX) ? velocityX : 0;
+    externalVelocity.sourceDirection.y = Number.isFinite(velocityY) ? velocityY : 0;
 
     arbitraryBoundary.source.x = X * grid_resolution.x / window.innerWidth;
     arbitraryBoundary.source.y = Y * grid_resolution.y / window.innerHeight;
