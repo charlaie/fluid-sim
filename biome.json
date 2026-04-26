@@ -1,0 +1,8 @@
+{
+	"files": {
+		"includes": ["src/**/*.js", "test/**/*.js", "!**/*.min.js"]
+	},
+	"linter": {
+		"includes": ["**", "!test/**"]
+	}
+}
