@@ -58,9 +58,9 @@ export default class ParticleSim {
 	}
 
 	initParticlePositions(particle_span) {
-		var len = particle_span * particle_span * 4;
-		var data = new Float32Array(len);
-		for (let i = 0; i < len; i++) {
+		var particleCount = particle_span * particle_span;
+		var data = new Float32Array(particleCount * 4);
+		for (let i = 0; i < particleCount; i++) {
 			const stride = i * 4;
 			data[stride] = Math.random() * 2 - 1;
 			data[stride + 1] = Math.random() * 2 - 1;

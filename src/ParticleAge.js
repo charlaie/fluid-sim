@@ -52,13 +52,13 @@ export default class ParticleAge {
 	}
 
 	initParticleAges(particle_span) {
-		var len = particle_span * particle_span * 4;
-		var data = new Float32Array(len);
-		for (let i = 0; i < len; i++) {
+		var particleCount = particle_span * particle_span;
+		var data = new Float32Array(particleCount * 4);
+		for (let i = 0; i < particleCount; i++) {
 			const stride = i * 4;
 
 			/* Assign random starting ages so particles die and respawn at their initial positions at staggered intervals. 
-               Should reduce the amount of empty empty/white space as particles are advected through fluid */
+	               Should reduce the amount of empty empty/white space as particles are advected through fluid */
 			data[stride] = THREE.MathUtils.randFloat(4950000.0, 5000000.0); // No idea why the numbers need to be this big. Super slow spawn rate otherwise.
 			data[stride + 1] = this.maxAge;
 			data[stride + 2] = 0.0;

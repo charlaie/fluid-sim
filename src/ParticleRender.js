@@ -28,12 +28,12 @@ export default class ParticleRender {
 			blending: THREE.NoBlending,
 		});
 
-		var len = particle_span * particle_span * 4;
+		var particleCount = particle_span * particle_span;
 		var vertices = [];
-		for (let i = 0; i < len; i++) {
+		for (let i = 0; i < particleCount; i++) {
 			const i4 = i * 4;
 			vertices[i4] = (i % particle_span) / particle_span;
-			vertices[i4 + 1] = i / particle_span / particle_span;
+			vertices[i4 + 1] = Math.floor(i / particle_span) / particle_span;
 			vertices[i4 + 2] = 0.0;
 			vertices[i4 + 3] = 1.0;
 		}
