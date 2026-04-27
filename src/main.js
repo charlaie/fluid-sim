@@ -1,17 +1,17 @@
 import * as THREE from "three";
-import AttributeField from "./AttributeField.js";
-import GridCellRender from "./GridCellRender.js";
-import ParticleSim from "./ParticleSim.js";
-import ParticleRender from "./ParticleRender.js";
-import ParticleAge from "./ParticleAge.js";
 import Advector from "./Advect.js";
-import ExternalForce from "./External-Forces.js";
-import Divergence from "./Divergence.js";
-import Jacobi from "./Jacobi.js";
-import Gradient from "./Gradient.js";
+import ArbitraryBoundary from "./Arbitrary-Boundaries.js";
+import AttributeField from "./AttributeField.js";
 import Boundary from "./Boundary.js";
 import BoundaryRender from "./BoundaryRender.js";
-import ArbitraryBoundary from "./Arbitrary-Boundaries.js";
+import Divergence from "./Divergence.js";
+import ExternalForce from "./External-Forces.js";
+import Gradient from "./Gradient.js";
+import GridCellRender from "./GridCellRender.js";
+import Jacobi from "./Jacobi.js";
+import ParticleAge from "./ParticleAge.js";
+import ParticleRender from "./ParticleRender.js";
+import ParticleSim from "./ParticleSim.js";
 
 var fluidScene, camera, renderer;
 var grid_resolution = new THREE.Vector2(512, 256);
@@ -281,7 +281,7 @@ document.onmousedown = (event) => {
 	arbitraryBoundary.source.z = 1.0;
 };
 
-document.onmouseup = (event) => {
+document.onmouseup = () => {
 	externalVelocity.source.z = 0;
 	arbitraryBoundary.source.z = 0;
 };
@@ -457,7 +457,7 @@ function runSimulation() {
 		}
 
 		/* Render boundaries on top of the desired fluid texture (i.e. particles, velocity, etc). Store in finalTex. */
-		var toRender = displayConfig.LAYER;
+		const toRender = displayConfig.LAYER;
 		switch (toRender) {
 			case "Fluid":
 				displayConfig.PARTICLES_ON = true;

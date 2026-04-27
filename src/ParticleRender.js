@@ -31,8 +31,8 @@ export default class ParticleRender {
 
 		var len = particle_span * particle_span * 4;
 		var vertices = [];
-		for (var i = 0; i < len; i++) {
-			var i4 = i * 4;
+		for (let i = 0; i < len; i++) {
+			const i4 = i * 4;
 			vertices[i4] = (i % particle_span) / particle_span;
 			vertices[i4 + 1] = i / particle_span / particle_span;
 			vertices[i4 + 2] = 0.0;
