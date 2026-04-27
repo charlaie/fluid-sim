@@ -33,19 +33,23 @@ export default class Boundary {
 		this.geometry = new THREE.PlaneGeometry(2, 2);
 		this.plane = new THREE.Mesh(this.geometry, this.material);
 		this.scene.add(this.plane);
+
+		this.setModeVelocity();
+	}
+
+	updateShader(shaderId) {
+		this.shaderProgram = document.getElementById(shaderId).innerHTML;
+		this.material.fragmentShader = this.shaderProgram;
+		this.material.needsUpdate = true;
 	}
 
 	setModeVelocity() {
-		this.shaderProgram = document.getElementById(
-			"boundaryVelocityFrag",
-		).innerHTML;
+		this.updateShader("boundaryVelocityFrag");
 		this.uniforms.boundaryValue.value = 0.0;
 	}
 
 	setModePressure() {
-		this.shaderProgram = document.getElementById(
-			"boundaryPressureFrag",
-		).innerHTML;
+		this.updateShader("boundaryPressureFrag");
 		this.uniforms.boundaryValue.value = 1.0;
 	}
 
