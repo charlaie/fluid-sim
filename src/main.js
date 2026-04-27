@@ -152,9 +152,13 @@ function initAttributeFields() {
 	divergenceCellBias = new THREE.Vector3(0.6, 0.6, 0.6);
 }
 
+function getParticleSpan(particleCount) {
+	return Math.max(1, Math.ceil(Math.sqrt(particleCount)));
+}
+
 function initParticles() {
 	/* Initialize particle simulation shader loader, particle positions buffer and particle age buffer */
-	var particleSpan = Math.sqrt(displayConfig.NUM_PARTICLES);
+	var particleSpan = getParticleSpan(displayConfig.NUM_PARTICLES);
 	var particleSpanVec2 = new THREE.Vector2(particleSpan, particleSpan);
 	particleSim = new ParticleSim(
 		grid_resolution,
@@ -172,10 +176,7 @@ function initParticles() {
 	particleAgeState = new AttributeField(particleSpanVec2);
 
 	/* Initialize shader loader and texture for rendering particles */
-	particleRender = new ParticleRender(
-		grid_resolution,
-		displayConfig.NUM_PARTICLES,
-	);
+	particleRender = new ParticleRender(grid_resolution, particleSpan);
 	particleTex = new THREE.WebGLRenderTarget(
 		grid_resolution.x,
 		grid_resolution.y,

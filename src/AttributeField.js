@@ -11,13 +11,16 @@ export default class AttributeField {
 	read_buf;
 	write_buf;
 	constructor(gridRes) {
-		this.read_buf = new THREE.WebGLRenderTarget(gridRes.x, gridRes.y, {
+		const width = Math.max(1, Math.ceil(gridRes.x));
+		const height = Math.max(1, Math.ceil(gridRes.y));
+
+		this.read_buf = new THREE.WebGLRenderTarget(width, height, {
 			minFilter: THREE.LinearFilter,
 			magFilter: THREE.NearestFilter,
 			format: THREE.RGBAFormat,
 			type: THREE.FloatType,
 		});
-		this.write_buf = new THREE.WebGLRenderTarget(gridRes.x, gridRes.y, {
+		this.write_buf = new THREE.WebGLRenderTarget(width, height, {
 			minFilter: THREE.LinearFilter,
 			magFilter: THREE.NearestFilter,
 			format: THREE.RGBAFormat,

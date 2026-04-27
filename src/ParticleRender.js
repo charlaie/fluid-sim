@@ -9,10 +9,9 @@ import * as THREE from "three";
  * For vertex v_i, texture(v_i.x, v_i.y) yields the real position of particle i)
  */
 export default class ParticleRender {
-	constructor(res, num_particles) {
+	constructor(res, particle_span) {
 		this.scene = new THREE.Scene();
 		this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-		var particle_span = Math.sqrt(num_particles);
 
 		this.uniforms = {
 			gridRes: { type: "v2", value: res },
